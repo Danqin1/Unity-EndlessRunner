@@ -7,8 +7,8 @@ public class Movement : MonoBehaviour
     CharacterController characterController;
     public float movementSpeed = 15f;
     private Vector3 moveDirection = Vector3.zero;
-    public float gravity = 10f;
-    public float jumpStrenght = 3f;
+    public float gravity = 150f;
+    public float jumpStrenght = 30f;
     public float faster = 1.0005f;
     public float offsetLine = 3;
     private int currentLine = 2;
@@ -31,9 +31,18 @@ public class Movement : MonoBehaviour
         {
             switchLane(1);
         }
+        //jumping
+        if(Input.GetKeyDown(KeyCode.W) && transform.position.y < 0.5)
+        {
+            moveDirection.y+=jumpStrenght;
+        }
         //Gravity
-        moveDirection.y -= gravity * Time.deltaTime;
+        if(!characterController.isGrounded)
+        {
+            moveDirection.y -= gravity * Time.deltaTime;
+        }
         characterController.Move(moveDirection * Time.deltaTime);
+        //centering the lines 1,2,3
         if(currentLine == 1 ) 
         {
             transform.position = Vector3.MoveTowards(transform.position,new Vector3(-3,transform.position.y,transform.position.z),0.2f);
@@ -44,10 +53,8 @@ public class Movement : MonoBehaviour
         {
             transform.position = Vector3.MoveTowards(transform.position,new Vector3(3,transform.position.y,transform.position.z),0.2f);
         }
+        
     }
-    /// <summary>
-    /// This function is called every fixed framerate frame, if the MonoBehaviour is enabled.
-    /// </summary>
     void FixedUpdate()
     {
         if(movementSpeed<40) movementSpeed*=faster;

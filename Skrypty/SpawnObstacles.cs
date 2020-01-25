@@ -9,21 +9,22 @@ public class SpawnObstacles : MonoBehaviour
     public GameObject coin;
     public Transform[] lines = new Transform[3];
     public bool isStart = false;
+    public GameObject[] spawned = new GameObject[2];
     void Start()
     {
         if (!isStart)
         {
-            int randomCoin = Random.Range(0,3);
+            int randomCoin = Random.Range(0, 3);
             int randomLine = Random.Range(0, 3);
             int randomObstacle = Random.Range(0, 3);
-            Instantiate(obstacle[randomObstacle], lines[randomLine].position, Quaternion.Euler(0, 180, 0));
-            if(randomCoin == 1)
+            spawned[0] = Instantiate(obstacle[randomObstacle], lines[randomLine].position, Quaternion.Euler(0, 180, 0));
+            if (randomCoin == 1)
             {
-                while(randomCoin == randomLine)
+                while (randomCoin == randomLine)
                 {
-                    randomCoin = Random.Range(0,3);
+                    randomCoin = Random.Range(0, 3);
                 }
-                Instantiate(coin, lines[randomCoin].position, Quaternion.Euler(0, 180, 0));
+                spawned[1] = Instantiate(coin, lines[randomCoin].position, Quaternion.Euler(0, 180, 0));
             }
         }
     }

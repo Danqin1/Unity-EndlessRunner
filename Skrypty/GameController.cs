@@ -6,6 +6,7 @@ public class GameController : MonoBehaviour
 {
     // Start is called before the first frame update
     public GameObject road;
+    public int score = 0;
     private int zOffset=0;
     void Start()
     {
