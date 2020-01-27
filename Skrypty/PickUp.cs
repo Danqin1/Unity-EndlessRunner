@@ -5,15 +5,15 @@ using UnityEngine;
 public class PickUp : MonoBehaviour
 {
     private GameController gameController;
-    public AudioClip pick;
-    private AudioSource audioSource;
+    private Sounds sounds;
+
     private void Start() {
-        audioSource = GetComponent<AudioSource>();
+        sounds = FindObjectOfType<Sounds>();
         gameController = FindObjectOfType<GameController>();
     }
     private void OnTriggerEnter(Collider other) 
-    {
-        audioSource.PlayOneShot(pick,0.7f);
+    { 
+        sounds.PlayPickUp();
         gameController.score++;
         DestroyInTime();
     }
