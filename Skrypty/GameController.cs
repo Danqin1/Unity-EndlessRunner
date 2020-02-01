@@ -7,7 +7,8 @@ public class GameController : MonoBehaviour
     // Start is called before the first frame update
     public GameObject road;
     public int score = 0;
-    private int zOffset=0;
+    public int zOffset=0;
+    public bool IsDead = false;
     void Start()
     {
         if(road)
@@ -25,12 +26,14 @@ public class GameController : MonoBehaviour
                 zOffset++;
             }
         }
+        IsDead = false;
     }
-
-    // Update is called once per frame
     void Update()
     {
-        
+        if(PlayerPrefs.GetInt("HighScore",0)<score)
+        {
+            PlayerPrefs.SetInt("HighScore",score);
+        }
     }
     public void SpawnRoad(GameObject road0)
     {

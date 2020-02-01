@@ -8,14 +8,22 @@ public class RespawnRoad : MonoBehaviour
     private SpawnObstacles spawnObstacles;
     void Start()
     {
-        gameController = Object.FindObjectOfType<GameController>();
+        gameController = FindObjectOfType<GameController>();
         spawnObstacles = GetComponentInParent<SpawnObstacles>();
     }
-   void OnTriggerEnter()
+   void OnTriggerEnter(Collider other)
     {
-        Destroy(spawnObstacles.spawned[0].gameObject);
-        Destroy(spawnObstacles.spawned[1].gameObject);
-        gameController.SpawnRoad(this.transform.parent.gameObject);
+        
+        if(other.gameObject.tag == "Player")
+        {
+            /*
+            Destroy(spawnObstacles.spawned[0].gameObject);
+            Destroy(spawnObstacles.spawned[1].gameObject);
+            gameController.SpawnRoad(this.transform.parent.gameObject);*/
+            Instantiate(gameController.road, new Vector3(0, 0, gameController.zOffset * 9), Quaternion.identity);
+            gameController.zOffset++;
+            Destroy(this.gameObject);
+        }
     }
     
 }

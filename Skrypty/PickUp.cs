@@ -6,6 +6,7 @@ public class PickUp : MonoBehaviour
 {
     private GameController gameController;
     private Sounds sounds;
+    public int Points = 10;
 
     private void Start() {
         sounds = FindObjectOfType<Sounds>();
@@ -14,7 +15,7 @@ public class PickUp : MonoBehaviour
     private void OnTriggerEnter(Collider other) 
     { 
         sounds.PlayPickUp();
-        gameController.score++;
+        gameController.score+=Points;
         DestroyInTime();
     }
     private IEnumerator DestroyInTime()

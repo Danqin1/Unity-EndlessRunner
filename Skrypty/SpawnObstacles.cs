@@ -16,7 +16,7 @@ public class SpawnObstacles : MonoBehaviour
         {
             int randomCoin = Random.Range(0, 3);
             int randomLine = Random.Range(0, 3);
-            int randomObstacle = Random.Range(0, 3);
+            int randomObstacle = Random.Range(0, obstacle.Length);
             spawned[0] = Instantiate(obstacle[randomObstacle], lines[randomLine].position, Quaternion.Euler(0, 180, 0));
             if (randomCoin == 1)
             {
